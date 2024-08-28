@@ -16,10 +16,30 @@ m=""
 f=""
 s=""
 u=""
+c=""
+p=""
+b=""
+b2=""
 
 # 使用 while 循环和 getopts 处理选项和参数
 while [[ $# -gt 0 ]]; do
     case "$1" in
+        -c)
+            shift
+            c="$1"
+            ;;
+        -p)
+            shift
+            p="$1"
+            ;;
+        -b)
+            shift
+            b="$1"
+            b2="$2"
+            if [[ $b2 = -* ]]; then
+                b2=''
+            fi
+            ;;
         -u)
             shift
             u="$1"
@@ -56,6 +76,18 @@ while [[ $# -gt 0 ]]; do
 done
 
 option="${non_option_args[0]}"
+
+# echo "option is: $option"
+# echo "v  is: $v"
+# echo "h  is: $h"
+# echo "m  is: $m"
+# echo "f  is: $f"
+# echo "s  is: $s"
+# echo "u  is: $u"
+# echo "c  is: $c"
+# echo "p  is: $p"
+# echo "b  is: $b"
+# echo "b2 is: $b2"
 
 # 加载功能函数
 source "$PLOAD_PATH/src/setup.sh"

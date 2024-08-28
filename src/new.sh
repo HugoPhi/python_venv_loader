@@ -11,12 +11,13 @@ fnew() {
         fi
     else
         if [[ ! -d "$PYENV_PYTHON/versions/$v" ]]; then  # 查看是否有这个版本
-            echo "pyenv version not found, please use pyenv to install Python $PYENV_PYTHON"
+            echo "pyenv 没有找到这个环境，请通过\`pyenv install\`下载 Python $v"
             return 1
         fi
         
         if [[ -z $m ]]; then
             VENV_NEW=$($PYENV_PYTHON/versions/$v/bin/python --version | awk '{print $2}')
+            return 1
         else
             out="${m// /_}"  # 将空格替换为'_'
             VENV_NEW=$($PYENV_PYTHON/versions/$v/bin/python --version | awk '{print $2}')
