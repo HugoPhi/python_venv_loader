@@ -4,6 +4,29 @@ git clone https://github.com/HugoPhi/python_venv_loader.git $HOME/.local/bin/vlo
 
 chmod +x $HOME/.local/bin/vload/vload
 
+## 添加man
+# 将 man 手册页文件复制到系统的 man 手册路径中
+MAN_PATH="/usr/local/share/man/man1"
+MAN_FILE="pyloader.1"
+
+# 检查是否有权限写入 man 路径
+if [ ! -d "$MAN_PATH" ]; then
+    echo "路径 $MAN_PATH 不存在，尝试创建..."
+    sudo mkdir -p "$MAN_PATH"
+fi
+
+echo "将手册页安装到 $MAN_PATH"
+sudo cp "$MAN_FILE" "$MAN_PATH"
+
+# 更新手册页数据库
+echo "更新 man 数据库..."
+sudo mandb
+
+echo "安装完成！你现在可以使用 'man pload' 查看手册页。"
+
+echo ""
+echo ""
+
 echo 'source $HOME/.local/bin/vload/main.sh' >> ~/.bashrc
 echo '欢迎使用python venv loader!'
 echo ''

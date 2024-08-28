@@ -1,0 +1,68 @@
+.TH PLOAD 1 "2024-08-28" "1.0.0" "Python 虚拟环境管理工具手册"
+.SH 名称
+pload \- 一个用于管理 Python 虚拟环境的 Bash 脚本工具。
+.SH 概述
+.B pload
+[\fI命令\fR] [\fI选项\fR]
+.SH 描述
+\fBpload\fR 是一个 Bash 脚本工具，用于简化 Python 虚拟环境的管理。通过此工具，用户可以方便地创建、删除、克隆和列出虚拟环境。
+
+.SH 命令
+.TP
+.B pload new
+创建一个新的全局 Python 虚拟环境。
+选项：
+.IP
+\fB\-m\fR: 添加环境用途的描述。
+.br
+\fB\-f\fR: 使用 pip 配置文件创建虚拟环境。
+.br
+\fB\-u\fR: 通过 URL 使用 pip 配置文件创建虚拟环境。
+.br
+\fB\-v\fR: 指定使用的 Python 版本。
+
+.TP
+.B pload rm
+删除指定的全局虚拟环境。支持正则表达式。
+例如：\fBpload rm 3.8.19\-*\fR 删除所有以 3.8.19- 为前缀的环境。
+
+.TP
+.B pload clone
+克隆一个虚拟环境到另一个虚拟环境。支持全局和局部环境之间的克隆。
+选项：
+.IP
+\fB\-c\fR: 将当前目录的 .venv 环境克隆到全局，名称为：current_py_version-[信息]。
+.br
+\fB\-p\fR: 从全局克隆到当前目录的 .venv 环境。
+.br
+\fB\-b\fR: 将一个全局虚拟环境克隆到另一个。
+.br
+\fB\-v\fR: 指定要克隆的全局虚拟环境名称。
+
+.TP
+.B pload list
+列出所有全局虚拟环境的名称。
+选项：
+.IP
+\fB\-s\fR: 列出所有全局虚拟环境名称中包含指定参数的环境。
+
+.TP
+.B pload setup
+激活当前目录的 .venv 环境。
+
+.TP
+.B pload -h
+显示帮助信息。
+
+.SH 示例
+.EX
+创建一个名为 3.8.19 的虚拟环境：
+pload new -v 3.8.19
+
+使用 pip 配置文件从 URL 创建虚拟环境：
+pload new -u https://example.com/requirements.txt
+.EE
+
+.SH 作者
+本工具由 HugoPhi 开发和维护。
+
