@@ -3,7 +3,11 @@ expand_list=()
 expand_patterns() {
     patterns=()
     for pattern in $@; do
-        patterns+=("$VENV_DIR/$pattern")
+        if [[ $pattern == ".venv" ]]; then
+            patterns+=(".venv")
+        else
+            patterns+=("$VENV_DIR/$pattern")
+        fi
     done
     
     # 遍历每个正则表达式

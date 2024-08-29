@@ -2,7 +2,7 @@ frm() {
     # 如果接收到 rm 选项，删除全局虚拟环境
     
     delist_origin=("${non_option_args[@]:1}")
-
+    
     # 展开正则表达式
     expand_patterns "${delist_origin[@]}"
     delist=( ${expand_list[@]} )
@@ -17,13 +17,19 @@ frm() {
     for x in "${delist[@]}"; do
         VENV_DELETE="$x"
         
-        if [[ ! -d $VENV_DIR/$VENV_DELETE ]]; then 
-            echo "不存在虚拟环境 $VENV_DIR/$VENV_DELETE."
+        if [[ $x == ".venv" ]]; then
+            TAR=".venv"
+        else
+            TAR="$VENV_DIR/$VENV_DELETE"
         fi
         
-        read -p "请输入\`$VENV_DELETE\`以删除这个环境（不用输入\`\`，你妈个傻卵）: " input
+        if [[ ! -d "$TAR" ]]; then 
+            echo "不存在虚拟环境 $VENV_DELETE."
+        fi
+        
+        read -p "请输入\`$VENV_DELETE\`以删除这个环境: " input
         if [[ "$input" == "$VENV_DELETE" ]]; then
-            rm -rf "$VENV_DIR/$VENV_DELETE"
+            rm -rf "$TAR"
             echo "  ✅$VENV_DELETE 已经被删除."
             success+=("$VENV_DELETE")
         else
