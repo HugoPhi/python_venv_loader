@@ -51,7 +51,7 @@ _pload_complete() {
             if [[ "${prev}" == "-v" ]]; then
                 COMPREPLY=( $(compgen -W "${pyenv_versions}" -- "${cur}") )
             elif [[ "${prev}" == "-m" ]]; then
-                COMPREPLY=( $(compgen -W "${.venv message}" -- "${cur}") )
+                COMPREPLY=( $(compgen -W ".venv ${message}" -- "${cur}") )
             else
                 # 获取剩余选项（从 new_opts 中移除已使用的选项）
                 remaining_opts=$(echo "${new_opts}" | sed -E "s/(${entered_opts// /|})//g")
