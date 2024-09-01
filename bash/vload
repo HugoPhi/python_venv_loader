@@ -1,0 +1,122 @@
+#!/bin/bash
+
+# Author: 胡芸铭(https://github.com/HugoPhi)
+# Usage : see "man pload"
+
+# 设置全局变量
+VENV_DIR="$HOME/.venvs"
+PYENV_PYTHON="$HOME/.pyenv"
+PLOAD_PATH="$HOME/.local/bin/vload/bash"
+
+# 初始化命令行参数
+non_option_args=()
+v=""
+h=""
+m=""
+f=""
+s=""
+u=""
+c=""
+p=""
+b=""
+b2=""
+
+# 使用 while 循环和 getopts 处理选项和参数
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -c)
+            shift
+            c="$1"
+            ;;
+        -p)
+            shift
+            p="$1"
+            ;;
+        -b)
+            shift
+            b="$1"
+            b2="$2"
+            if [[ $b2 = -* ]]; then
+                b2=''
+            fi
+            ;;
+        -u)
+            shift
+            u="$1"
+            ;;
+        -v)
+            shift
+            v="$1"
+            ;;
+        -h)
+            shift
+            h="$1"
+            ;;
+        -m)
+            shift
+            m="$1"
+            ;;
+        -f)
+            shift
+            f="$1"
+            ;;
+        -s)
+            shift
+            s="$1"
+            ;;
+        -*)
+            echo "Unknown option: $1" >&2
+            exit 1
+            ;;
+        *)
+            non_option_args+=("$1")
+            ;;
+    esac
+    shift
+done
+
+option="${non_option_args[0]}"
+
+# echo "option is: $option"
+# echo "v  is: $v"
+# echo "h  is: $h"
+# echo "m  is: $m"
+# echo "f  is: $f"
+# echo "s  is: $s"
+# echo "u  is: $u"
+# echo "c  is: $c"
+# echo "p  is: $p"
+# echo "b  is: $b"
+# echo "b2 is: $b2"
+
+# 加载功能函数
+source "$PLOAD_PATH/src/setup.sh"
+source "$PLOAD_PATH/src/utils.sh"
+source "$PLOAD_PATH/src/list.sh"
+source "$PLOAD_PATH/src/new.sh"
+source "$PLOAD_PATH/src/rm.sh"
+source "$PLOAD_PATH/src/clone.sh"
+source "$PLOAD_PATH/src/help.sh"
+
+# 检查选项和参数
+if [[ "$option" == "setup" ]]; then
+    fsetup
+elif [[ "$option" == "list" ]]; then
+    flist
+elif [[ "$option" == "new" ]]; then
+    fnew
+elif [[ "$option" == "rm" ]]; then
+    frm
+elif [[ "$option" == "clone" ]]; then
+    fclone
+elif [[ "$option" == "" || -n $h ]]; then 
+    fhelp
+elif [ -d "$VENV_DIR/$option" ]; then
+    # 如果没有[选项]，则加载指定的虚拟环境
+    source "$VENV_DIR/$option/bin/activate"
+else
+    echo "虚拟环境 '$option' 不存在于 $VENV_DIR 目录下."
+    return 1
+fi
+
+

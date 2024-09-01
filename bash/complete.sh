@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 添加 ~/.local/bin/vload 到 PATH 中
-export PATH="$HOME/.local/bin/vload:$PATH"
+export PATH="$HOME/.local/bin/vload/bash/:$PATH"
 
 # python 虚拟环境自动补全函数
 _pload_complete() {

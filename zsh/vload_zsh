@@ -1,15 +1,13 @@
-#!/bin/bash
-
+#!/bin/zsh
 # Author: 胡芸铭(https://github.com/HugoPhi)
 # Usage : see "man pload"
 
 # 设置全局变量
 VENV_DIR="$HOME/.venvs"
 PYENV_PYTHON="$HOME/.pyenv"
-PLOAD_PATH="$HOME/.local/bin/vload"
+PLOAD_PATH="$HOME/.local/bin/vload/zsh"
 
-# 初始化命令行参数
-non_option_args=()
+# 初始化命令行参数 non_option_args=()
 v=""
 h=""
 m=""
@@ -20,6 +18,7 @@ c=""
 p=""
 b=""
 b2=""
+non_option_args=()
 
 # 使用 while 循环和 getopts 处理选项和参数
 while [[ $# -gt 0 ]]; do
@@ -75,7 +74,7 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
-option="${non_option_args[0]}"
+option="${non_option_args[1]}"
 
 # echo "option is: $option"
 # echo "v  is: $v"

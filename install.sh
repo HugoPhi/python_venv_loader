@@ -27,9 +27,20 @@ echo "安装完成！你现在可以使用 'man pload' 查看手册页。"
 echo ""
 echo ""
 
-echo 'source $HOME/.local/bin/vload/main.sh' >> ~/.bashrc
+### add to terminal config
+
+current_shell=$(basename "$SHELL")
+
+if [ "$current_shell" = "bash" ]; then
+    echo 'source $HOME/.local/bin/vload/bash/main.sh' >> ~/.bashrc
+elif [ "$current_shell" = "zsh" ]; then
+    echo 'source $HOME/.local/bin/vload/zsh/main.zsh' >> ~/.bashrc
+else
+    echo "当前终端是 $current_shell."
+fi
+
+
 echo '欢迎使用python venv loader!'
 echo ''
-echo '重启以使用命令`pload`，或者运行下面的命令：'
-echo '  `source ~/.local/bin/vload/main.sh`'
+echo '重启以使用命令`pload`'
 echo ''
