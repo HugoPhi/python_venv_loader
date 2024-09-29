@@ -34,7 +34,7 @@ current_shell=$(basename "$SHELL")
 if [ "$current_shell" = "bash" ]; then
     echo 'source $HOME/.local/bin/vload/bash/main.sh' >> ~/.bashrc
 elif [ "$current_shell" = "zsh" ]; then
-    echo 'source $HOME/.local/bin/vload/zsh/main.zsh' >> ~/.bashrc
+    echo 'source $HOME/.local/bin/vload/zsh/main.zsh' >> ~/.zshrc
 else
     echo "当前终端是 $current_shell."
 fi
