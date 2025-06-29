@@ -1,3 +1,6 @@
+> [!WARNING]   
+> This repo has been migrated to [pload](https://github.com/HugoPhi/pload)
+
 # pload: Python Virtual Environment Loader
 
 `python_venv_loader` 是一个 Bash 脚本工具，旨在简化 Python 虚拟环境的管理。通过命令行界面，用户可以高效地创建、删除、克隆和列出虚拟环境。
